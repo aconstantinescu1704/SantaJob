@@ -1,0 +1,82 @@
+Object Oriented Programming Course
+Homework - Etapa 1 - Santa Claus is coming to ACS students
+
+November 2021
+
+# Testing
+
+The Main class runs the checker on your implementation. Add the entry point to your implementation in it.
+
+Run Main to test your implementation from the IDE or from command line.
+
+# About the code
+    The project starts with processing the input and storing the data into specific class objects.
+    Therefore, we have created the following packages and classes for a better suggestive and logic representation of all children.
+
+* tests - contains the provided tests in JSON format
+* src
+   * checker - the checker's sources including the checkstyle necessary files, not to be modified
+   * fileio - classes for parsing the input files, the logic that parses them
+   * common, utils
+        * contain utility classes with constants and static methods
+
+    * database : - here we have all classes that store arrays of santa's children (children/presents/changes)
+                   which will be processed in the given tasks
+                 - all constructors populate the object arrays with input data processed in the "fileio" package classes
+                 - all database classes are in !a aggregation relationship! with the specific santa entity
+        - AnnualData =     - constructs and stores all information about children and presents
+                           - also can preform different actions(methods) of setting data, sorting and searching in the stored
+                             arrays. These arrays are updated based on the new children/presents lists received
+                           - has method that is called for updating children's age
+                           - all methods are logically related with all children and all presents
+        - AnnualChangeData = - constructs and stores all information about changes in an array of newChildren, newGifts,
+                               children updates. It also stores santa's new budget and can preform search actions on given arrays
+        - ChildrenUpdatesData =  - constructs and stores all information about each child update
+                                 - also can perform update action for the given child by changing certain characteristics of it
+                                   like gift preferences and nice score
+
+    * children : - here we have classes of all category age children( Teen, Baby, Kid) were we store the characteristics
+                    and methods of those children
+                 - all those classes are created based on 3 design patterns
+                        -> factory : we want to isolate the object that needs an instance of a certain type, from its actual creation.
+                                    In addition, the class that will use the instance does not even need to specify exactly the subclass
+                                    of the object to be created, so it does not need to know all the implementations of that type, but only
+                                    what characteristics the created object must have.
+                        -> strategy : we want a type of algorithm (strategy) with several possible implementations and we want
+                                      to choose dynamically which algorithm we use, without making the system too tightly coupled.
+                                      Since we need 3 implementation for setting the average score, the strategy pattern is the most suited.
+                                    : because the factory and strategy pattern overlapped and because of logical purposes
+                                      => We will omit the strategy word from the classes name, but we keep in mind that kid, baby, teen are
+                                      the classes that implement the setAverage strategy
+                        -> singleton :  we need our factory to be used from several components of the application. To save memory, it is enough
+                                        to have a single instance of the factory and use it. As a solution we make the factory class a singleton
+        - Child = - abstract class that can't be instantiated since it's used to force all classes that extends
+                    her to implement strategies for the abstract method specified
+                  - the class contains relevant information/characteristics about each child
+                  - the class also contains methods that set, reset, get and search in different ways some characteristics
+          Baby = - class that extends Child and promises to implement the abstract method setAverageScore
+                 - it implements the strategy required : average score = 10;
+          Kid =  - class that extends Child and promises to implement the abstract method setAverageScore
+                 - it implements the strategy required : average score = arithmetic average of all nice scores;
+          Teen = - class that extends Child and promises to implement the abstract method setAverageScore
+                 - it implements the strategy required : average score = weighted average of all nice scores;
+          ChildFactory = - implements the factory design pattern through createFactory method that based on a child
+                           age, constructs the respective object of category age which is also a strategy for the setAverageScore
+                           method.
+                         - the creteFactory is also overloaded, since there are 2 options of received child data
+                         - the class is also a singleton
+
+    * santa :  - here we have classes related to santa : santaJob and present
+        - Present :  - the class contains relevant information/characteristics about each child
+                     - the class also implements Comparable interface through compraTo method to facilitate
+                       future sorting operations
+        - SantaJob : - class that stores all information about santa's job through arrays and objects specified
+                       in the database package
+                     - implements annualJob method that makes all updates, sets all arrays and distributes the
+                        presents to all children
+                     - in aggregation relationship with classes from database package
+     THE FLOW OF THE PROGRAMME:
+        The data input is processed and stored in databases(arrays) of certain entities objects.
+        AnnualJob method, sets all entities fields and for each annual change input, reset fields such as children
+        presents, budget. It makes all necessary updates and distributes the presents to all children based on the
+        required criteria and procedure.
