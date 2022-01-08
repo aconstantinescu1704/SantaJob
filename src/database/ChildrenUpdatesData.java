@@ -1,6 +1,8 @@
 package database;
 
 import children.Child;
+import common.Constants;
+
 import java.util.ArrayList;
 
 public final class ChildrenUpdatesData {
@@ -32,7 +34,7 @@ public final class ChildrenUpdatesData {
      * @param child the child with the given id for which we apply the changes
      */
     public void updateChild(final Child child) {
-        if (niceScore != -1) {
+        if (niceScore != Constants.SCORE_NULL) {
             child.setHistoryScore(niceScore);
             child.setAverageScore();
         }

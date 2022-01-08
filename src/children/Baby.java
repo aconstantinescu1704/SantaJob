@@ -1,4 +1,5 @@
 package children;
+import common.Constants;
 import santa.Present;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Baby extends Child {
                 final int age, final String city, final Double niceScore,
                 final ArrayList<String> giftsPreference) {
         super(id, lastName, firstName, age, city, niceScore, giftsPreference);
-        averageScore = 10.0;
+        averageScore = Constants.AVERAGE_SCORE_BABY;
     }
 
 
@@ -28,6 +29,6 @@ public class Baby extends Child {
      * sets average score as 10 for baby
      */
     public void setAverageScore() {
-        this.averageScore = 10.0;
+        this.averageScore = Constants.AVERAGE_SCORE_BABY;
     }
 }

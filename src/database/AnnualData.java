@@ -3,6 +3,7 @@ import children.Child;
 import children.ChildFactory;
 import children.Kid;
 import children.Teen;
+import common.Constants;
 import fileio.InitialDataInput;
 import santa.Present;
 import java.util.ArrayList;
@@ -16,12 +17,18 @@ public final class AnnualData {
 
     public AnnualData(final InitialDataInput initialDataInput) {
 
-        for (var childInput : initialDataInput.getChildren()) {
-            if (ChildFactory.create(childInput) != null) {
-                children.add(ChildFactory.create(childInput));
+        try {
+            if (initialDataInput.getChildren() != null) {
+                for (var childInput : initialDataInput.getChildren()) {
+                    if (ChildFactory.create(childInput) != null) {
+                        children.add(ChildFactory.create(childInput));
+                    }
+                }
+                this.santaGiftsList = initialDataInput.getSantaGiftsList();
             }
+        } catch (NullPointerException e) {
+
         }
-        this.santaGiftsList = initialDataInput.getSantaGiftsList();
     }
 
     /**
@@ -101,7 +108,7 @@ public final class AnnualData {
         List<Child> newTypeChildren = new ArrayList<>();
         while (iter.hasNext()) {
             Child child = iter.next();
-            if (child.getAge() == 5) {
+            if (child.getAge() == Constants.AGE_LAST_BABY) {
                 Kid kid = new Kid(child.getId(), child.getLastName(),
                         child.getFirstName(), child.getAge(), child.getCity(),
                         child.getNiceScore(), child.getGiftsPreferences());
@@ -110,7 +117,7 @@ public final class AnnualData {
                 newTypeChildren.add(kid);
                 iter.remove();
             } else {
-                if (child.getAge() == 12) {
+                if (child.getAge() == Constants.AGE_LAST_KID) {
                     Teen teen = new Teen(child.getId(), child.getLastName(),
                             child.getFirstName(), child.getAge(), child.getCity(),
                             child.getNiceScore(), child.getGiftsPreferences());
@@ -119,7 +126,7 @@ public final class AnnualData {
                     newTypeChildren.add(teen);
                     iter.remove();
                 } else {
-                    if (child.getAge() > 18) {
+                    if (child.getAge() > Constants.AGE_LAST_TEEN) {
                         iter.remove();
                     }
                 }

@@ -1,6 +1,7 @@
 package fileio;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import common.Constants;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -39,27 +40,28 @@ public class InputLoader {
         ArrayList<AnnualChangesInput> annualChangesInputs = new ArrayList<>();
 
         try {
-            JSONObject jsonObject = (JSONObject) jsonParser
-                    .parse(new FileReader(inputPath));
-            numberOfYears = ((Long) ((JSONObject) jsonObject).get("numberOfYears")).intValue();
-            santaBuget = ((Long) ((JSONObject) jsonObject).get("santaBudget")).intValue();
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(inputPath));
+            if (jsonObject != null) {
+                numberOfYears = ((Long) ((JSONObject) jsonObject).get("numberOfYears")).intValue();
+                santaBuget = ((Long) ((JSONObject) jsonObject).get("santaBudget")).intValue();
 
-            JSONObject jsonInitialData = (JSONObject) jsonObject.get("initialData");
-            JSONArray jsonAnnualChanges = (JSONArray) jsonObject.get("annualChanges");
+                JSONObject jsonInitialData = (JSONObject) jsonObject.get("initialData");
+                JSONArray jsonAnnualChanges = (JSONArray) jsonObject.get("annualChanges");
 
-            if (jsonInitialData != null) {
-                JSONArray jsonChildren = (JSONArray) jsonInitialData.get("children");
-                if (jsonChildren != null) {
-                    for (Object jsonChild : jsonChildren) {
-                        children.add(new ChildInput(
-                                ((Long) ((JSONObject) jsonChild).get("id")).intValue(),
-                                (String) ((JSONObject) jsonChild).get("lastName"),
-                                (String) ((JSONObject) jsonChild).get("firstName"),
-                                ((Long) ((JSONObject) jsonChild).get("age")).intValue(),
-                                (String) ((JSONObject) jsonChild).get("city"),
-                                ((Long) ((JSONObject) jsonChild).get("niceScore")).doubleValue(),
-                                Utils.convertJSONArray((JSONArray) ((JSONObject) jsonChild)
-                                        .get("giftsPreferences"))));
+                if (jsonInitialData != null) {
+                    JSONArray jsonChildren = (JSONArray) jsonInitialData.get("children");
+                    if (jsonChildren != null) {
+                        for (Object jsonChild : jsonChildren) {
+                            children.add(new ChildInput(
+                                    ((Long) ((JSONObject) jsonChild).get("id")).intValue(),
+                                    (String) ((JSONObject) jsonChild).get("lastName"),
+                                    (String) ((JSONObject) jsonChild).get("firstName"),
+                                    ((Long) ((JSONObject) jsonChild).get("age")).intValue(),
+                                    (String) ((JSONObject) jsonChild).get("city"),
+                                    ((Long) ((JSONObject) jsonChild).get("niceScore"))
+                                            .doubleValue(),
+                                    Utils.convertJSONArray((JSONArray) ((JSONObject) jsonChild)
+                                            .get("giftsPreferences"))));
 
                         }
                     }
@@ -123,10 +125,10 @@ public class InputLoader {
                                         .get("niceScore")) == null) {
                                     childrenUpdates.add(new ChildrenUpdatesData(
                                             ((Long) ((JSONObject) jsonChildUpdate).get("id"))
-                                                    .intValue(), -1.0,
+                                                    .intValue(), Constants.SCORE_NULL,
                                             Utils.convertJSONArray((JSONArray)
                                                     ((JSONObject) jsonChildUpdate)
-                                                    .get("giftsPreferences"))));
+                                                            .get("giftsPreferences"))));
                                 } else {
                                     childrenUpdates.add(new ChildrenUpdatesData(
                                             ((Long) ((JSONObject) jsonChildUpdate)
@@ -135,16 +137,16 @@ public class InputLoader {
                                                     .get("niceScore")).doubleValue(),
                                             Utils.convertJSONArray((JSONArray)
                                                     ((JSONObject) jsonChildUpdate)
-                                                    .get("giftsPreferences"))));
+                                                            .get("giftsPreferences"))));
                                 }
                             }
                         }
                         annualChangesInputs.add(new AnnualChangesInput(newSantaBuget,
                                 newPresents, newChildren, childrenUpdates));
                     }
+                }
+
             }
-
-
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,11 @@
 package common;
 
 public final class Constants {
+    public static final int AGE_LAST_BABY = 5;
+    public static final int AGE_LAST_KID = 12;
+    public static final int AGE_LAST_TEEN = 18;
+    public static final Double SCORE_NULL = -1.0;
+    public static final Double AVERAGE_SCORE_BABY = 10.0;
     public static final String OUTPUT_PATH = "output/out_";
     public static final String REF_PATH = "ref/ref_test";
     public static final String FILE_EXTENSION = ".json";
