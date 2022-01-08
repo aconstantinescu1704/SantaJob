@@ -102,7 +102,50 @@ public final class SantaJob {
         }
         annualOutput.setAnnualChildrenOutputs(initial);
 
-     
+        for (int i = 0; i < numberOfYears; i++) {
+
+            AnnualChildrenOutput childrenOutput = new AnnualChildrenOutput();
+            initialData.annualGrowth();
+            initialData.setNewChildren(annualChanges.get(i).getNewChildren());
+            initialData.setNewPresents(annualChanges.get(i).getNewGifts());
+
+            for (ChildrenUpdatesData childrenUpdate : annualChanges.get(i).getChildrenUpdates()) {
+                Child child = initialData.findChild(childrenUpdate.getId());
+                if (child != null) {
+                    childrenUpdate.updateChild(child);
+                }
+            }
+
+            setSantaBudget(annualChanges.get(i).getNewSantaBudget());
+            setBudgetUnit(initialData.getChildren());
+
+            //set alocated budget
+            for (var child : initialData.getChildren()) {
+                child.setAssignedBudget(budgetUnit);
+            }
+
+            initialData.sortPresents();
+            for (var child : initialData.getChildren()) {
+                child.resetReceivedGifts();
+            }
+            for (var child : initialData.getChildren()) {
+                double sumGifts = 0.0;
+                for (var gift : child.getGiftsPreferences()) {
+                    Present present = initialData.getPresent(gift);
+                    if (present != null  && present.getPrice() != null
+                            && !child.getReceivedGifts().contains(present)) {
+                        if ((sumGifts + present.getPrice()) <= child.getAssignedBudget()) {
+                            child.setReceivedGifts(present);
+                            sumGifts = sumGifts + present.getPrice();
+                        }
+                    }
+                }
+                childrenOutput.setChildren(child);
+            }
+
+            childrenOutput.sortChildren();
+            annualOutput.setAnnualChildrenOutputs(childrenOutput);
+        }
         return annualOutput;
     }
 
