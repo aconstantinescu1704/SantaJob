@@ -1,8 +1,5 @@
 package database;
-import children.Child;
-import children.ChildFactory;
-import children.Kid;
-import children.Teen;
+import children.*;
 import common.Constants;
 import fileio.InitialDataInput;
 import santa.Present;
@@ -36,9 +33,10 @@ public final class AnnualData {
      * @param children the new list of children received from annual changes
      */
     public void setNewChildren(final List<Child> children) {
+        VisitAverageScore visitAverageScore = new VisitAverageScore();
         for (Child child : children) {
             child.setHistoryScore(child.getNiceScore());
-            child.setAverageScore();
+            child.acceptAverageScore(visitAverageScore);
         }
         this.children.addAll(children);
     }
@@ -88,7 +86,8 @@ public final class AnnualData {
      */
     public Present getPresent(final String gift) {
         for (Present present : santaGiftsList) {
-            if (present.getCategory().equals(gift)) {
+            if (present.getCategory().equals(gift)
+                    && present.getQuantity() > 0 ) {
                 return present;
             }
         }
@@ -106,23 +105,26 @@ public final class AnnualData {
         }
         Iterator<Child> iter = children.iterator();
         List<Child> newTypeChildren = new ArrayList<>();
+        VisitAverageScore visitAverageScore = new VisitAverageScore();
         while (iter.hasNext()) {
             Child child = iter.next();
             if (child.getAge() == Constants.AGE_LAST_BABY) {
                 Kid kid = new Kid(child.getId(), child.getLastName(),
                         child.getFirstName(), child.getAge(), child.getCity(),
-                        child.getNiceScore(), child.getGiftsPreferences());
+                        child.getNiceScore(), child.getGiftsPreferences(),
+                        child.getNiceScoreBonus(), child.getElf());
                 kid.setNiceScoreHistory(child.getNiceScoreHistory());
-                kid.setAverageScore();
+                kid.acceptAverageScore(visitAverageScore);
                 newTypeChildren.add(kid);
                 iter.remove();
             } else {
                 if (child.getAge() == Constants.AGE_LAST_KID) {
                     Teen teen = new Teen(child.getId(), child.getLastName(),
                             child.getFirstName(), child.getAge(), child.getCity(),
-                            child.getNiceScore(), child.getGiftsPreferences());
+                            child.getNiceScore(), child.getGiftsPreferences(),
+                            child.getNiceScoreBonus(), child.getElf());
                     teen.setNiceScoreHistory(child.getNiceScoreHistory());
-                    teen.setAverageScore();
+                    teen.acceptAverageScore(visitAverageScore);
                     newTypeChildren.add(teen);
                     iter.remove();
                 } else {
@@ -135,4 +137,20 @@ public final class AnnualData {
         children.addAll(newTypeChildren);
     }
 
+    public void yellowElf(Child child) {
+        if (child.getElf().equals("yellow")) {
+            if (child.getReceivedGifts().isEmpty()) {
+                sortPresents();
+                for (Present present : santaGiftsList) {
+                    if (present.getCategory().equals(child.getGiftsPreferences().get(0))) {
+                        if (present.getQuantity() > 0) {
+                            child.setReceivedGifts(present);
+                            present.changeQuantity();
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }

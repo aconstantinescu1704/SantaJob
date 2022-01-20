@@ -11,14 +11,17 @@ public final class AnnualChangesInput {
     private List<Present> newGifts = new ArrayList<>();
     private List<ChildInput> newChildren = new ArrayList<>();
     private List<ChildrenUpdatesData> childrenUpdates = new ArrayList<>();
+    private String strategy;
 
     public AnnualChangesInput(final int newSantaBudget, final List<Present> newGifts,
                                final List<ChildInput> newChildren,
-                               final List<ChildrenUpdatesData> childrenUpdates) {
+                               final List<ChildrenUpdatesData> childrenUpdates,
+                               final String strategy) {
         this.newSantaBudget = newSantaBudget;
         this.newGifts = newGifts;
         this.newChildren = newChildren;
         this.childrenUpdates = childrenUpdates;
+        this.strategy = strategy;
     }
 
     public int getNewSantaBudget() {
@@ -35,5 +38,9 @@ public final class AnnualChangesInput {
 
     public List<ChildrenUpdatesData> getChildrenUpdates() {
         return childrenUpdates;
+    }
+
+    public String getStrategy() {
+        return strategy;
     }
 }

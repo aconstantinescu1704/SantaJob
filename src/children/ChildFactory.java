@@ -34,20 +34,23 @@ public final class ChildFactory {
             return new Teen(childInput.getId(), childInput.getLastName(),
                     childInput.getFirstName(), childInput.getAge(),
                     childInput.getCity(), childInput.getNiceScore(),
-                    childInput.getGiftsPreference());
+                    childInput.getGiftsPreference(), childInput.getNiceScoreBonus(),
+                    childInput.getElf());
         }
         if (childInput.getAge() >= Constants.AGE_LAST_BABY
                 && childInput.getAge() < Constants.AGE_LAST_KID) {
             return new Kid(childInput.getId(), childInput.getLastName(),
                     childInput.getFirstName(), childInput.getAge(),
                     childInput.getCity(), childInput.getNiceScore(),
-                    childInput.getGiftsPreference());
+                    childInput.getGiftsPreference(), childInput.getNiceScoreBonus(),
+                    childInput.getElf());
         }
         if (childInput.getAge() < Constants.AGE_LAST_BABY) {
             return new Baby(childInput.getId(), childInput.getLastName(),
                     childInput.getFirstName(), childInput.getAge(),
                     childInput.getCity(), childInput.getNiceScore(),
-                    childInput.getGiftsPreference());
+                    childInput.getGiftsPreference(), childInput.getNiceScoreBonus(),
+                    childInput.getElf());
         }
         return null;
     }
@@ -65,7 +68,8 @@ public final class ChildFactory {
                     child.getFirstName(), child.getAge(), child.getCity(),
                     child.getNiceScore(), child.getAssignedBudget(),
                     child.getNiceScoreHistory(), child.getReceivedGifts(),
-                    child.getGiftsPreferences(), child.getAverageScore());
+                    child.getGiftsPreferences(), child.getAverageScore(),
+                    child.getNiceScoreBonus(), child.getElf());
         }
         if (child.getAge() >= Constants.AGE_LAST_BABY
                 && child.getAge() < Constants.AGE_LAST_KID) {
@@ -73,14 +77,16 @@ public final class ChildFactory {
                     child.getFirstName(), child.getAge(), child.getCity(),
                     child.getNiceScore(), child.getAssignedBudget(),
                     child.getNiceScoreHistory(), child.getReceivedGifts(),
-                    child.getGiftsPreferences(), child.getAverageScore());
+                    child.getGiftsPreferences(), child.getAverageScore(),
+                    child.getNiceScoreBonus(), child.getElf());
         }
         if (child.getAge() < Constants.AGE_LAST_BABY) {
             return new Baby(child.getId(), child.getLastName(),
                     child.getFirstName(), child.getAge(), child.getCity(),
                     child.getNiceScore(), child.getAssignedBudget(),
                     child.getNiceScoreHistory(), child.getReceivedGifts(),
-                    child.getGiftsPreferences(), child.getAverageScore());
+                    child.getGiftsPreferences(), child.getAverageScore(),
+                    child.getNiceScoreBonus(), child.getElf());
         }
         return null;
     }

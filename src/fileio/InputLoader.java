@@ -61,7 +61,10 @@ public class InputLoader {
                                     ((Long) ((JSONObject) jsonChild).get("niceScore"))
                                             .doubleValue(),
                                     Utils.convertJSONArray((JSONArray) ((JSONObject) jsonChild)
-                                            .get("giftsPreferences"))));
+                                            .get("giftsPreferences")),
+                                    ((Long) ((JSONObject) jsonChild).get("niceScoreBonus"))
+                                            .doubleValue(),
+                                    (String) ((JSONObject) jsonChild).get("elf")));
 
                         }
                     }
@@ -72,7 +75,8 @@ public class InputLoader {
                         presents.add(new Present(
                                 (String) ((JSONObject) jsonPresent).get("productName"),
                                 ((Long) ((JSONObject) jsonPresent).get("price")).doubleValue(),
-                                (String) ((JSONObject) jsonPresent).get("category")));
+                                (String) ((JSONObject) jsonPresent).get("category"),
+                                ((Long) ((JSONObject) jsonPresent).get("quantity")).intValue()));
                     }
                 }
 
@@ -95,7 +99,8 @@ public class InputLoader {
                                         (String) ((JSONObject) jsonNewPresent).get("productName"),
                                         ((Long) ((JSONObject) jsonNewPresent).get("price"))
                                                 .doubleValue(),
-                                        (String) ((JSONObject) jsonNewPresent).get("category")));
+                                        (String) ((JSONObject) jsonNewPresent).get("category"),
+                                        ((Long) ((JSONObject) jsonNewPresent).get("quantity")).intValue()));
                             }
                         }
 
@@ -113,7 +118,10 @@ public class InputLoader {
                                                 .doubleValue(),
                                         Utils.convertJSONArray((JSONArray)
                                                 ((JSONObject) jsonNewChild)
-                                                        .get("giftsPreferences"))));
+                                                        .get("giftsPreferences")),
+                                        ((Long) ((JSONObject) jsonNewChild).get("niceScoreBonus"))
+                                                .doubleValue(),
+                                        (String) ((JSONObject) jsonNewChild).get("elf")));
 
                             }
                         }
@@ -128,7 +136,8 @@ public class InputLoader {
                                                     .intValue(), Constants.SCORE_NULL,
                                             Utils.convertJSONArray((JSONArray)
                                                     ((JSONObject) jsonChildUpdate)
-                                                            .get("giftsPreferences"))));
+                                                            .get("giftsPreferences")),
+                                            (String) ((JSONObject) jsonChildUpdate).get("elf")));
                                 } else {
                                     childrenUpdates.add(new ChildrenUpdatesData(
                                             ((Long) ((JSONObject) jsonChildUpdate)
@@ -137,12 +146,14 @@ public class InputLoader {
                                                     .get("niceScore")).doubleValue(),
                                             Utils.convertJSONArray((JSONArray)
                                                     ((JSONObject) jsonChildUpdate)
-                                                            .get("giftsPreferences"))));
+                                                            .get("giftsPreferences")),
+                                            (String) ((JSONObject) jsonChildUpdate).get("elf")));
                                 }
                             }
                         }
+                        String strategy = (String) ((JSONObject) jsonAnnualChange).get("strategy");
                         annualChangesInputs.add(new AnnualChangesInput(newSantaBuget,
-                                newPresents, newChildren, childrenUpdates));
+                                newPresents, newChildren, childrenUpdates, strategy));
                     }
                 }
 
