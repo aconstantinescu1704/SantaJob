@@ -80,3 +80,4 @@ Run Main to test your implementation from the IDE or from command line.
         AnnualJob method, sets all entities fields and for each annual change input, reset fields such as children
         presents, budget. It makes all necessary updates and distributes the presents to all children based on the
         required criteria and procedure.
+      PART 2
