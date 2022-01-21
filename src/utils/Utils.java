@@ -4,7 +4,7 @@ import org.json.simple.JSONArray;
 
 import java.util.ArrayList;
 
-public class Utils {
+public final class Utils {
 
     /**
      * Transforms an array of JSON's into an array of strings

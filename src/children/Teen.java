@@ -10,17 +10,19 @@ public class Teen extends Child {
                 final int age, final String city, final Double niceScore,
                 final Double assignedBudget, final ArrayList<Double> historyScore,
                 final ArrayList<Present> giftsReceived, final ArrayList<String> giftsPreference,
-                final Double averageScore) {
+                final Double averageScore, final Double niceScoreBonus, final String elf) {
         super(id, lastName, firstName, age, city, niceScore, assignedBudget,
                 historyScore,  giftsReceived,
-                giftsPreference);
+                giftsPreference, niceScoreBonus, elf);
         this.averageScore = averageScore;
     }
 
     public Teen(final int id, final String lastName, final String firstName,
                 final int age, final String city, final Double niceScore,
-                final ArrayList<String> giftsPreference) {
-        super(id, lastName, firstName, age, city, niceScore, giftsPreference);
+                final ArrayList<String> giftsPreference, final Double niceScoreBonus,
+                final String elf) {
+        super(id, lastName, firstName, age, city, niceScore, giftsPreference,
+                niceScoreBonus, elf);
         this.averageScore = super.getNiceScore();
     }
 
@@ -28,8 +30,9 @@ public class Teen extends Child {
      * sets average score for teen as the weighted average of
      * all nice scores accumulated
      */
-    public void setAverageScore() {
-        int ponderi = 0;
+    public void acceptAverageScore(VisitAverageScore visitor) {
+        visitor.setAverageScore(this);
+      /*  int ponderi = 0;
         if (super.getNiceScoreHistory().size() == 1) {
             averageScore = super.getNiceScore();
         } else {
@@ -40,5 +43,11 @@ public class Teen extends Child {
             }
             averageScore = averageScore / ponderi;
         }
+        averageScore += averageScore * super.getNiceScoreBonus()/ 100 ;
+        if (averageScore > 10.0) {
+            averageScore = 10.0;
+        }
+
+       */
     }
 }

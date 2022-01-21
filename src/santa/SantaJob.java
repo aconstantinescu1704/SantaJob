@@ -1,5 +1,6 @@
 package santa;
 
+import children.VisitAverageScore;
 import fileio.AnnualChildrenOutput;
 import fileio.AnnualOutput;
 import children.Child;
@@ -78,26 +79,21 @@ public final class SantaJob {
 
         AnnualOutput annualOutput = new AnnualOutput();
         AnnualChildrenOutput initial = new AnnualChildrenOutput();
+        VisitAverageScore visitAverageScore = new VisitAverageScore();
         //runda 0
-        setBudgetUnit(initialData.getChildren());
         for (var child : initialData.getChildren()) {
             child.setHistoryScore(child.getNiceScore());
-            child.setAverageScore();
+            child.acceptAverageScore(visitAverageScore);
+        }
+        setBudgetUnit(initialData.getChildren());
+        for (var child : initialData.getChildren()) {
             child.setAssignedBudget(budgetUnit);
+            child.elfChanges();
         }
         initialData.sortPresents();
+        AssignationStrategy initialStrategy = new IdStrategy();
+        initialStrategy.assign(initialData);
         for (var child : initialData.getChildren()) {
-            double sumGifts = 0.0;
-            for (var gift : child.getGiftsPreferences()) {
-                Present present = initialData.getPresent(gift);
-                if (present != null && present.getPrice() != null
-                        && !child.getReceivedGifts().contains(present)) {
-                    if ((sumGifts + present.getPrice()) <= child.getAssignedBudget()) {
-                        child.setReceivedGifts(present);
-                        sumGifts = sumGifts + present.getPrice();
-                    }
-                }
-            }
             initial.setChildren(child);
         }
         annualOutput.setAnnualChildrenOutputs(initial);
@@ -122,24 +118,19 @@ public final class SantaJob {
             //set alocated budget
             for (var child : initialData.getChildren()) {
                 child.setAssignedBudget(budgetUnit);
+                child.elfChanges();
             }
 
             initialData.sortPresents();
             for (var child : initialData.getChildren()) {
                 child.resetReceivedGifts();
             }
+
+            AssignationStrategy assignationStrategy = annualChanges.get(i).setStrategy();
+            assignationStrategy.assign(initialData);
+
             for (var child : initialData.getChildren()) {
-                double sumGifts = 0.0;
-                for (var gift : child.getGiftsPreferences()) {
-                    Present present = initialData.getPresent(gift);
-                    if (present != null  && present.getPrice() != null
-                            && !child.getReceivedGifts().contains(present)) {
-                        if ((sumGifts + present.getPrice()) <= child.getAssignedBudget()) {
-                            child.setReceivedGifts(present);
-                            sumGifts = sumGifts + present.getPrice();
-                        }
-                    }
-                }
+                initialData.yellowElf(child);
                 childrenOutput.setChildren(child);
             }
 

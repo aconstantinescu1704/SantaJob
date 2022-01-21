@@ -1,15 +1,20 @@
 package santa;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Present implements Comparable<Present> {
     private String productName;
     private Double price;
     private String category;
+    @JsonIgnore
+    private int quantity;
 
     public Present(final String productName, final Double price,
-                   final String category) {
+                   final String category, final int quantity) {
         this.productName = productName;
         this.price = price;
         this.category = category;
+        this.quantity = quantity;
     }
 
     public final String getProductName() {
@@ -22,6 +27,14 @@ public class Present implements Comparable<Present> {
 
     public final String getCategory() {
         return category;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void changeQuantity() {
+        quantity--;
     }
 
     /**
