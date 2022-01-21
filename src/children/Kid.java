@@ -10,35 +10,27 @@ public class Kid extends Child {
                final int age, final String city, final Double niceScore,
                final Double assignedBudget, final ArrayList<Double> historyScore,
                final ArrayList<Present> giftsReceived, final ArrayList<String> giftsPreference,
-               final Double averageScore) {
+               final Double averageScore, final Double niceScoreBonus, final String elf) {
         super(id, lastName, firstName, age, city, niceScore, assignedBudget,
                 historyScore,  giftsReceived,
-                giftsPreference);
+                giftsPreference, niceScoreBonus, elf);
         this.averageScore = averageScore;
     }
 
     public Kid(final int id, final String lastName, final String firstName,
                final int age, final String city, final Double niceScore,
-               final ArrayList<String> giftsPreference) {
+               final ArrayList<String> giftsPreference, final Double niceScoreBonus,
+               final String elf) {
 
-        super(id, lastName, firstName, age, city, niceScore, giftsPreference);
+        super(id, lastName, firstName, age, city, niceScore, giftsPreference, niceScoreBonus, elf);
         averageScore = super.getNiceScore();
     }
 
     /**
-     * sets average score for teen as the arithmetic average of
-     * all nice scores accumulated
+     * accepts to be visited in order to update average score
      */
-    public void setAverageScore() {
-        if (super.getNiceScoreHistory().size() == 1) {
-            averageScore = super.getNiceScore();
-        } else {
-            averageScore = 0.0;
-            for (var score : super.getNiceScoreHistory()) {
-                averageScore = averageScore + score;
-            }
-            averageScore = averageScore / super.getNiceScoreHistory().size();
-        }
+    public void acceptAverageScore(final VisitAverageScore visitor) {
+        visitor.setAverageScore(this);
     }
 
 }

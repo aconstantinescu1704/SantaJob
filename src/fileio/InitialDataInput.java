@@ -11,7 +11,10 @@ public final class InitialDataInput {
 
     public InitialDataInput(final List<ChildInput> children,
                             final List<Present> santaGiftsList) {
-        this.children = children;
+        if (children != null) {
+            this.children.addAll(children);
+        }
+
         this.santaGiftsList = santaGiftsList;
     }
 

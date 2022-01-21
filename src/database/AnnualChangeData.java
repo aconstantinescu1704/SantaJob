@@ -3,6 +3,10 @@ package database;
 import children.Child;
 import children.ChildFactory;
 import fileio.AnnualChangesInput;
+import santa.AssignationStrategy;
+import santa.AverageScoreStrategy;
+import santa.IdStrategy;
+import santa.NiceScoreCityStrategy;
 import santa.Present;
 
 import java.util.ArrayList;
@@ -13,6 +17,7 @@ public final class AnnualChangeData {
     private List<Present> newGifts = new ArrayList<>();
     private List<Child> newChildren = new ArrayList<>();
     private List<ChildrenUpdatesData> childrenUpdates = new ArrayList<>();
+    private String strategy;
 
     public AnnualChangeData(final AnnualChangesInput annualChangesInput) {
         this.newSantaBudget = annualChangesInput.getNewSantaBudget();
@@ -24,6 +29,7 @@ public final class AnnualChangeData {
             }
         }
         this.childrenUpdates = annualChangesInput.getChildrenUpdates();
+        this.strategy = annualChangesInput.getStrategy();
     }
 
     /**
@@ -38,6 +44,23 @@ public final class AnnualChangeData {
              }
         }
         return false;
+    }
+
+    /**
+     * method that sets strategy based on the given stored strategy as field
+     * @return the object required by the strategy string
+     */
+    public AssignationStrategy setStrategy() {
+        if (strategy.equals("id")) {
+            return new IdStrategy();
+        }
+        if (strategy.equals("niceScore")) {
+            return new AverageScoreStrategy();
+        }
+        if (strategy.equals("niceScoreCity")) {
+            return new NiceScoreCityStrategy();
+        }
+        return null;
     }
 
     public int getNewSantaBudget() {
