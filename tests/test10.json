@@ -1,111 +1,187 @@
 {
-  "numberOfYears": 2,
-  "santaBudget": 868,
+  "numberOfYears": 7,
+  "santaBudget": 1139,
   "initialData": {
     "children": [
       {
         "id": 0,
-        "lastName": "Cantemir",
-        "firstName": "Maria",
-        "age": 10,
-        "city": "Cluj-Napoca",
-        "niceScore": 7,
+        "lastName": "Stoica",
+        "firstName": "Diana",
+        "age": 6,
+        "city": "Braila",
+        "niceScore": 10,
         "giftsPreferences": [
-          "Sweets",
+          "Books",
           "Technology",
-          "Books"
-        ],
-        "niceScoreBonus": 0,
-        "elf": "white"
+          "Board Games"
+        ]
       },
       {
         "id": 1,
-        "lastName": "Cantemir",
+        "lastName": "Stoica",
         "firstName": "Radu",
-        "age": 15,
+        "age": 3,
         "city": "Braila",
+        "niceScore": 6,
+        "giftsPreferences": [
+          "Clothes",
+          "Toys"
+        ]
+      },
+      {
+        "id": 2,
+        "lastName": "Cantemir",
+        "firstName": "Tudor",
+        "age": 9,
+        "city": "Iasi",
         "niceScore": 8,
         "giftsPreferences": [
-          "Toys",
-          "Technology"
-        ],
-        "niceScoreBonus": 0,
-        "elf": "white"
+          "Board Games",
+          "Sweets"
+        ]
+      },
+      {
+        "id": 3,
+        "lastName": "Pop",
+        "firstName": "Tudor",
+        "age": 20,
+        "city": "Timisoara",
+        "niceScore": 7,
+        "giftsPreferences": [
+          "Books",
+          "Toys"
+        ]
+      },
+      {
+        "id": 4,
+        "lastName": "Pop",
+        "firstName": "Miruna",
+        "age": 19,
+        "city": "Braila",
+        "niceScore": 9,
+        "giftsPreferences": [
+          "Books",
+          "Board Games",
+          "Sweets"
+        ]
       }
     ],
     "santaGiftsList": [
       {
-        "productName": "Headphones",
-        "price": 100,
-        "category": "Technology",
-        "quantity": 6
+        "productName": "Harry Potter",
+        "price": 35,
+        "category": "Books"
       },
       {
-        "productName": "Milk and Cookies",
+        "productName": "Chocolate",
+        "price": 15,
+        "category": "Sweets"
+      },
+      {
+        "productName": "Dress",
+        "price": 45,
+        "category": "Clothes"
+      },
+      {
+        "productName": "Gummy Bears",
+        "price": 10,
+        "category": "Sweets"
+      },
+      {
+        "productName": "Puzzle",
+        "price": 50,
+        "category": "Board Games"
+      },
+      {
+        "productName": "Twilight",
         "price": 30,
-        "category": "Sweets",
-        "quantity": 1
+        "category": "Books"
+      },
+      {
+        "productName": "Doll",
+        "price": 10,
+        "category": "Toys"
+      },
+      {
+        "productName": "Uno",
+        "price": 10,
+        "category": "Board Games"
+      },
+      {
+        "productName": "Teddy Bear",
+        "price": 5,
+        "category": "Toys"
       },
       {
         "productName": "Diary of a Wimpy Kid",
         "price": 25,
-        "category": "Books",
-        "quantity": 4
+        "category": "Books"
+      },
+      {
+        "productName": "Monopoly",
+        "price": 30,
+        "category": "Board Games"
       },
       {
         "productName": "Iphone",
         "price": 700,
-        "category": "Technology",
-        "quantity": 4
+        "category": "Technology"
       },
       {
         "productName": "Castle",
         "price": 15,
-        "category": "Toys",
-        "quantity": 3
+        "category": "Toys"
       }
     ]
   },
   "annualChanges": [
     {
-      "newSantaBudget": 868,
+      "newSantaBudget": 1745,
       "newGifts": [],
       "newChildren": [],
-      "childrenUpdates": [
-        {
-          "id": 0,
-          "niceScore": null,
-          "giftsPreferences": [],
-          "elf": "white"
-        },
-        {
-          "id": 1,
-          "niceScore": 3,
-          "giftsPreferences": [],
-          "elf": "white"
-        }
-      ],
-      "strategy": "id"
+      "childrenUpdates": []
     },
     {
-      "newSantaBudget": 868,
+      "newSantaBudget": 800,
+      "newGifts": [],
+      "newChildren": [],
+      "childrenUpdates": []
+    },
+    {
+      "newSantaBudget": 1327,
       "newGifts": [],
       "newChildren": [],
       "childrenUpdates": [
         {
-          "id": 0,
-          "niceScore": 2,
-          "giftsPreferences": [],
-          "elf": "white"
-        },
-        {
-          "id": 1,
+          "id": 7,
           "niceScore": null,
-          "giftsPreferences": [],
-          "elf": "white"
+          "giftsPreferences": ["Technology"]
         }
-      ],
-      "strategy": "id"
+      ]
+    },
+    {
+      "newSantaBudget": 980,
+      "newGifts": [],
+      "newChildren": [],
+      "childrenUpdates": []
+    },
+    {
+      "newSantaBudget": 1560,
+      "newGifts": [],
+      "newChildren": [],
+      "childrenUpdates": []
+    },
+    {
+      "newSantaBudget": 234,
+      "newGifts": [],
+      "newChildren": [],
+      "childrenUpdates": []
+    },
+    {
+      "newSantaBudget": 900,
+      "newGifts": [],
+      "newChildren": [],
+      "childrenUpdates": []
     }
   ]
 }

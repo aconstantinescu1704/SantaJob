@@ -3,8 +3,6 @@ import children.Child;
 import children.ChildFactory;
 import children.Kid;
 import children.Teen;
-import children.VisitAverageScore;
-import common.Constants;
 import fileio.InitialDataInput;
 import santa.Present;
 import java.util.ArrayList;
@@ -18,18 +16,12 @@ public final class AnnualData {
 
     public AnnualData(final InitialDataInput initialDataInput) {
 
-        try {
-            if (initialDataInput.getChildren() != null) {
-                for (var childInput : initialDataInput.getChildren()) {
-                    if (ChildFactory.create(childInput) != null) {
-                        children.add(ChildFactory.create(childInput));
-                    }
-                }
-                this.santaGiftsList = initialDataInput.getSantaGiftsList();
+        for (var childInput : initialDataInput.getChildren()) {
+            if (ChildFactory.create(childInput) != null) {
+                children.add(ChildFactory.create(childInput));
             }
-        } catch (NullPointerException e) {
-
         }
+        this.santaGiftsList = initialDataInput.getSantaGiftsList();
     }
 
     /**
@@ -37,10 +29,9 @@ public final class AnnualData {
      * @param children the new list of children received from annual changes
      */
     public void setNewChildren(final List<Child> children) {
-        VisitAverageScore visitAverageScore = new VisitAverageScore();
         for (Child child : children) {
             child.setHistoryScore(child.getNiceScore());
-            child.acceptAverageScore(visitAverageScore);
+            child.setAverageScore();
         }
         this.children.addAll(children);
     }
@@ -90,8 +81,7 @@ public final class AnnualData {
      */
     public Present getPresent(final String gift) {
         for (Present present : santaGiftsList) {
-            if (present.getCategory().equals(gift)
-                    && present.getQuantity() > 0) {
+            if (present.getCategory().equals(gift)) {
                 return present;
             }
         }
@@ -109,30 +99,27 @@ public final class AnnualData {
         }
         Iterator<Child> iter = children.iterator();
         List<Child> newTypeChildren = new ArrayList<>();
-        VisitAverageScore visitAverageScore = new VisitAverageScore();
         while (iter.hasNext()) {
             Child child = iter.next();
-            if (child.getAge() == Constants.AGE_LAST_BABY) {
+            if (child.getAge() == 5) {
                 Kid kid = new Kid(child.getId(), child.getLastName(),
                         child.getFirstName(), child.getAge(), child.getCity(),
-                        child.getNiceScore(), child.getGiftsPreferences(),
-                        child.getNiceScoreBonus(), child.getElf());
+                        child.getNiceScore(), child.getGiftsPreferences());
                 kid.setNiceScoreHistory(child.getNiceScoreHistory());
-                kid.acceptAverageScore(visitAverageScore);
+                kid.setAverageScore();
                 newTypeChildren.add(kid);
                 iter.remove();
             } else {
-                if (child.getAge() == Constants.AGE_LAST_KID) {
+                if (child.getAge() == 12) {
                     Teen teen = new Teen(child.getId(), child.getLastName(),
                             child.getFirstName(), child.getAge(), child.getCity(),
-                            child.getNiceScore(), child.getGiftsPreferences(),
-                            child.getNiceScoreBonus(), child.getElf());
+                            child.getNiceScore(), child.getGiftsPreferences());
                     teen.setNiceScoreHistory(child.getNiceScoreHistory());
-                    teen.acceptAverageScore(visitAverageScore);
+                    teen.setAverageScore();
                     newTypeChildren.add(teen);
                     iter.remove();
                 } else {
-                    if (child.getAge() > Constants.AGE_LAST_TEEN) {
+                    if (child.getAge() > 18) {
                         iter.remove();
                     }
                 }
@@ -141,24 +128,4 @@ public final class AnnualData {
         children.addAll(newTypeChildren);
     }
 
-    /**
-     * method that introduces new distributing method if the child's elf is yellow
-     * @param child the child for which we check apply the property
-     */
-    public void yellowElf(final Child child) {
-        if (child.getElf().equals("yellow")) {
-            if (child.getReceivedGifts().isEmpty()) {
-                sortPresents();
-                for (Present present : santaGiftsList) {
-                    if (present.getCategory().equals(child.getGiftsPreferences().get(0))) {
-                        if (present.getQuantity() > 0) {
-                            child.setReceivedGifts(present);
-                            present.changeQuantity();
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    }
 }

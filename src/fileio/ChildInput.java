@@ -14,13 +14,10 @@ public final class ChildInput {
     private ArrayList<Double> historyScore = new ArrayList<>();
     private ArrayList<Present> giftsReceived = new ArrayList<>();
     private ArrayList<String> giftsPreference = new ArrayList<>();
-    private Double niceScoreBonus;
-    private String elf;
 
     public ChildInput(final int id, final String lastName, final String firstName,
                       final int age, final String city, final Double niceScore,
-                      final ArrayList<String> giftsPreference, final Double niceScoreBonus,
-                      final String elf) {
+                      final ArrayList<String> giftsPreference) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -28,8 +25,6 @@ public final class ChildInput {
         this.city = city;
         this.niceScore = niceScore;
         this.giftsPreference = giftsPreference;
-        this.niceScoreBonus = niceScoreBonus;
-        this.elf = elf;
     }
 
     public ArrayList<Double> getHistoryScore() {
@@ -68,14 +63,6 @@ public final class ChildInput {
 
     public ArrayList<String> getGiftsPreference() {
         return giftsPreference;
-    }
-
-    public Double getNiceScoreBonus() {
-        return niceScoreBonus;
-    }
-
-    public String getElf() {
-        return elf;
     }
 
     @Override

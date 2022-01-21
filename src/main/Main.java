@@ -48,10 +48,11 @@ public final class Main {
             ObjectMapper objectMapper = new ObjectMapper();
             FileWriter fileWriter = new FileWriter(filepath);
             String json = objectMapper
-                        .writerWithDefaultPrettyPrinter()
-                        .writeValueAsString(santaJob.annualJob());
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(santaJob.annualJob());
             fileWriter.write(json);
             fileWriter.close();
+
         }
 
         Checker.calculateScore();

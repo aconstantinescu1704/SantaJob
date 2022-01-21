@@ -1,116 +1,107 @@
 {
-  "numberOfYears": 2,
-  "santaBudget": 25,
+  "numberOfYears": 4,
+  "santaBudget": 10,
   "initialData": {
     "children": [
       {
         "id": 0,
-        "lastName": "Cantemir",
-        "firstName": "Tudor",
-        "age": 14,
-        "city": "Cluj-Napoca",
-        "niceScore": 6,
+        "lastName": "Popescu",
+        "firstName": "Andreea",
+        "age": 15,
+        "city": "Braila",
+        "niceScore": 7,
         "giftsPreferences": [
-          "Books",
+          "Clothes",
           "Toys"
-        ],
-        "niceScoreBonus": 0,
-        "elf": "white"
+        ]
       },
       {
         "id": 1,
         "lastName": "Cantemir",
-        "firstName": "Radu",
-        "age": 1,
-        "city": "Oradea",
-        "niceScore": 7,
+        "firstName": "Diana",
+        "age": 15,
+        "city": "Brasov",
+        "niceScore": 3,
         "giftsPreferences": [
-          "Technology",
-          "Clothes"
-        ],
-        "niceScoreBonus": 0,
-        "elf": "white"
+          "Toys",
+          "Board Games"
+        ]
+      },
+      {
+        "id": 2,
+        "lastName": "Ionescu",
+        "firstName": "Miruna",
+        "age": 16,
+        "city": "Oradea",
+        "niceScore": 6,
+        "giftsPreferences": [
+          "Books",
+          "Sweets"
+        ]
       }
     ],
     "santaGiftsList": [
       {
+        "productName": "Chocolate",
+        "price": 15,
+        "category": "Sweets"
+      },
+      {
         "productName": "Iphone",
         "price": 700,
-        "category": "Technology",
-        "quantity": 7
+        "category": "Technology"
+      },
+      {
+        "productName": "Dress",
+        "price": 45,
+        "category": "Clothes"
+      },
+      {
+        "productName": "Gummy Bears",
+        "price": 10,
+        "category": "Sweets"
+      },
+      {
+        "productName": "Puzzle",
+        "price": 50,
+        "category": "Board Games"
       },
       {
         "productName": "Doll",
         "price": 10,
-        "category": "Toys",
-        "quantity": 4
+        "category": "Toys"
       },
       {
-        "productName": "Uno",
-        "price": 10,
-        "category": "Board Games",
-        "quantity": 4
-      },
-      {
-        "productName": "Handbag",
-        "price": 200,
-        "category": "Clothes",
-        "quantity": 9
-      },
-      {
-        "productName": "Diary of a Wimpy Kid",
-        "price": 25,
-        "category": "Books",
-        "quantity": 9
-      },
-      {
-        "productName": "Twilight",
-        "price": 30,
-        "category": "Books",
-        "quantity": 2
+        "productName": "Castle",
+        "price": 15,
+        "category": "Toys"
       }
     ]
   },
   "annualChanges": [
     {
-      "newSantaBudget": 25,
+      "newSantaBudget": 254,
       "newGifts": [],
       "newChildren": [],
-      "childrenUpdates": [
-        {
-          "id": 0,
-          "niceScore": 9,
-          "giftsPreferences": [],
-          "elf": "white"
-        },
-        {
-          "id": 1,
-          "niceScore": 6,
-          "giftsPreferences": [],
-          "elf": "white"
-        }
-      ],
-      "strategy": "id"
+      "childrenUpdates": []
     },
     {
-      "newSantaBudget": 25,
+      "newSantaBudget": 200,
       "newGifts": [],
       "newChildren": [],
-      "childrenUpdates": [
-        {
-          "id": 0,
-          "niceScore": 5,
-          "giftsPreferences": [],
-          "elf": "white"
-        },
-        {
-          "id": 1,
-          "niceScore": 10,
-          "giftsPreferences": [],
-          "elf": "white"
-        }
-      ],
-      "strategy": "id"
+      "childrenUpdates": []
+    },
+    {
+      "newSantaBudget": 157,
+      "newGifts": [],
+      "newChildren": [],
+      "childrenUpdates": []
+    },
+    {
+      "newSantaBudget": 179,
+      "newGifts": [],
+      "newChildren": [],
+      "childrenUpdates": []
     }
   ]
 }

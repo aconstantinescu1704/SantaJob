@@ -1,7 +1,6 @@
 package fileio;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import common.Constants;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -40,31 +39,27 @@ public class InputLoader {
         ArrayList<AnnualChangesInput> annualChangesInputs = new ArrayList<>();
 
         try {
-            JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(inputPath));
-            if (jsonObject != null) {
-                numberOfYears = ((Long) ((JSONObject) jsonObject).get("numberOfYears")).intValue();
-                santaBuget = ((Long) ((JSONObject) jsonObject).get("santaBudget")).intValue();
+            JSONObject jsonObject = (JSONObject) jsonParser
+                    .parse(new FileReader(inputPath));
+            numberOfYears = ((Long) ((JSONObject) jsonObject).get("numberOfYears")).intValue();
+            santaBuget = ((Long) ((JSONObject) jsonObject).get("santaBudget")).intValue();
 
-                JSONObject jsonInitialData = (JSONObject) jsonObject.get("initialData");
-                JSONArray jsonAnnualChanges = (JSONArray) jsonObject.get("annualChanges");
+            JSONObject jsonInitialData = (JSONObject) jsonObject.get("initialData");
+            JSONArray jsonAnnualChanges = (JSONArray) jsonObject.get("annualChanges");
 
-                if (jsonInitialData != null) {
-                    JSONArray jsonChildren = (JSONArray) jsonInitialData.get("children");
-                    if (jsonChildren != null) {
-                        for (Object jsonChild : jsonChildren) {
-                            children.add(new ChildInput(
-                                    ((Long) ((JSONObject) jsonChild).get("id")).intValue(),
-                                    (String) ((JSONObject) jsonChild).get("lastName"),
-                                    (String) ((JSONObject) jsonChild).get("firstName"),
-                                    ((Long) ((JSONObject) jsonChild).get("age")).intValue(),
-                                    (String) ((JSONObject) jsonChild).get("city"),
-                                    ((Long) ((JSONObject) jsonChild).get("niceScore"))
-                                            .doubleValue(),
-                                    Utils.convertJSONArray((JSONArray) ((JSONObject) jsonChild)
-                                            .get("giftsPreferences")),
-                                    ((Long) ((JSONObject) jsonChild).get("niceScoreBonus"))
-                                            .doubleValue(),
-                                    (String) ((JSONObject) jsonChild).get("elf")));
+            if (jsonInitialData != null) {
+                JSONArray jsonChildren = (JSONArray) jsonInitialData.get("children");
+                if (jsonChildren != null) {
+                    for (Object jsonChild : jsonChildren) {
+                        children.add(new ChildInput(
+                                ((Long) ((JSONObject) jsonChild).get("id")).intValue(),
+                                (String) ((JSONObject) jsonChild).get("lastName"),
+                                (String) ((JSONObject) jsonChild).get("firstName"),
+                                ((Long) ((JSONObject) jsonChild).get("age")).intValue(),
+                                (String) ((JSONObject) jsonChild).get("city"),
+                                ((Long) ((JSONObject) jsonChild).get("niceScore")).doubleValue(),
+                                Utils.convertJSONArray((JSONArray) ((JSONObject) jsonChild)
+                                        .get("giftsPreferences"))));
 
                         }
                     }
@@ -75,8 +70,7 @@ public class InputLoader {
                         presents.add(new Present(
                                 (String) ((JSONObject) jsonPresent).get("productName"),
                                 ((Long) ((JSONObject) jsonPresent).get("price")).doubleValue(),
-                                (String) ((JSONObject) jsonPresent).get("category"),
-                                ((Long) ((JSONObject) jsonPresent).get("quantity")).intValue()));
+                                (String) ((JSONObject) jsonPresent).get("category")));
                     }
                 }
 
@@ -99,9 +93,7 @@ public class InputLoader {
                                         (String) ((JSONObject) jsonNewPresent).get("productName"),
                                         ((Long) ((JSONObject) jsonNewPresent).get("price"))
                                                 .doubleValue(),
-                                        (String) ((JSONObject) jsonNewPresent).get("category"),
-                                        ((Long) ((JSONObject) jsonNewPresent).get("quantity"))
-                                                .intValue()));
+                                        (String) ((JSONObject) jsonNewPresent).get("category")));
                             }
                         }
 
@@ -119,10 +111,7 @@ public class InputLoader {
                                                 .doubleValue(),
                                         Utils.convertJSONArray((JSONArray)
                                                 ((JSONObject) jsonNewChild)
-                                                        .get("giftsPreferences")),
-                                        ((Long) ((JSONObject) jsonNewChild).get("niceScoreBonus"))
-                                                .doubleValue(),
-                                        (String) ((JSONObject) jsonNewChild).get("elf")));
+                                                        .get("giftsPreferences"))));
 
                             }
                         }
@@ -134,11 +123,10 @@ public class InputLoader {
                                         .get("niceScore")) == null) {
                                     childrenUpdates.add(new ChildrenUpdatesData(
                                             ((Long) ((JSONObject) jsonChildUpdate).get("id"))
-                                                    .intValue(), Constants.SCORE_NULL,
+                                                    .intValue(), -1.0,
                                             Utils.convertJSONArray((JSONArray)
                                                     ((JSONObject) jsonChildUpdate)
-                                                            .get("giftsPreferences")),
-                                            (String) ((JSONObject) jsonChildUpdate).get("elf")));
+                                                    .get("giftsPreferences"))));
                                 } else {
                                     childrenUpdates.add(new ChildrenUpdatesData(
                                             ((Long) ((JSONObject) jsonChildUpdate)
@@ -147,18 +135,16 @@ public class InputLoader {
                                                     .get("niceScore")).doubleValue(),
                                             Utils.convertJSONArray((JSONArray)
                                                     ((JSONObject) jsonChildUpdate)
-                                                            .get("giftsPreferences")),
-                                            (String) ((JSONObject) jsonChildUpdate).get("elf")));
+                                                    .get("giftsPreferences"))));
                                 }
                             }
                         }
-                        String strategy = (String) ((JSONObject) jsonAnnualChange).get("strategy");
                         annualChangesInputs.add(new AnnualChangesInput(newSantaBuget,
-                                newPresents, newChildren, childrenUpdates, strategy));
+                                newPresents, newChildren, childrenUpdates));
                     }
-                }
-
             }
+
+
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }

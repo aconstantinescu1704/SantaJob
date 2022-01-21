@@ -1,5 +1,22 @@
 Starting audit...
-[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\database\AnnualData.java:39:50: 'children' hides a field. [HiddenField]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\Baby.java:23:24: '10.0' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\Baby.java:31:29: '10.0' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:5:1: Class ChildFactory should be declared as final. [FinalClass]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:12:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:26:36: '12' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:26:65: '18' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:32:36: '5' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:32:63: '12' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:38:35: '5' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:54:31: '12' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:54:55: '18' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:61:31: '5' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:61:53: '12' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\children\ChildFactory.java:68:30: '5' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\database\AnnualData.java:31:50: 'children' hides a field. [HiddenField]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\database\AnnualData.java:104:35: '5' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\database\AnnualData.java:113:39: '12' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\database\AnnualData.java:122:42: '18' is a magic number. [MagicNumber]
 [ERROR] C:\Users\Tibi Constantinescu\Documents\Ana\facultate\oop-asignments-master\oop-asignments-master\proiect1\.\src\utils\Utils.java:7:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 Audit done.
-Checkstyle ends with 2 errors.
+Checkstyle ends with 19 errors.

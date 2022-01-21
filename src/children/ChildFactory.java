@@ -1,20 +1,14 @@
 package children;
 
-import common.Constants;
 import fileio.ChildInput;
 
-public final class ChildFactory {
+public class ChildFactory {
 
     private static ChildFactory instance =  null;
 
     private ChildFactory() {
 
     }
-
-    /**
-     *
-     * @return
-     */
     public static ChildFactory getInstance() {
         if (instance == null) {
             instance = new ChildFactory();
@@ -29,28 +23,23 @@ public final class ChildFactory {
      */
     public static Child create(final ChildInput childInput) {
 
-        if (childInput.getAge() >= Constants.AGE_LAST_KID
-                && childInput.getAge() <= Constants.AGE_LAST_TEEN) {
+        if (childInput.getAge() >= 12 && childInput.getAge() <= 18) {
             return new Teen(childInput.getId(), childInput.getLastName(),
                     childInput.getFirstName(), childInput.getAge(),
                     childInput.getCity(), childInput.getNiceScore(),
-                    childInput.getGiftsPreference(), childInput.getNiceScoreBonus(),
-                    childInput.getElf());
+                    childInput.getGiftsPreference());
         }
-        if (childInput.getAge() >= Constants.AGE_LAST_BABY
-                && childInput.getAge() < Constants.AGE_LAST_KID) {
+        if (childInput.getAge() >= 5 && childInput.getAge() < 12) {
             return new Kid(childInput.getId(), childInput.getLastName(),
                     childInput.getFirstName(), childInput.getAge(),
                     childInput.getCity(), childInput.getNiceScore(),
-                    childInput.getGiftsPreference(), childInput.getNiceScoreBonus(),
-                    childInput.getElf());
+                    childInput.getGiftsPreference());
         }
-        if (childInput.getAge() < Constants.AGE_LAST_BABY) {
+        if (childInput.getAge() < 5) {
             return new Baby(childInput.getId(), childInput.getLastName(),
                     childInput.getFirstName(), childInput.getAge(),
                     childInput.getCity(), childInput.getNiceScore(),
-                    childInput.getGiftsPreference(), childInput.getNiceScoreBonus(),
-                    childInput.getElf());
+                    childInput.getGiftsPreference());
         }
         return null;
     }
@@ -62,31 +51,26 @@ public final class ChildFactory {
      */
     public static Child create(final Child child) {
 
-        if (child.getAge() >= Constants.AGE_LAST_KID
-                && child.getAge() <= Constants.AGE_LAST_TEEN) {
+        if (child.getAge() >= 12 && child.getAge() <= 18) {
             return new Teen(child.getId(), child.getLastName(),
                     child.getFirstName(), child.getAge(), child.getCity(),
                     child.getNiceScore(), child.getAssignedBudget(),
                     child.getNiceScoreHistory(), child.getReceivedGifts(),
-                    child.getGiftsPreferences(), child.getAverageScore(),
-                    child.getNiceScoreBonus(), child.getElf());
+                    child.getGiftsPreferences(), child.getAverageScore());
         }
-        if (child.getAge() >= Constants.AGE_LAST_BABY
-                && child.getAge() < Constants.AGE_LAST_KID) {
+        if (child.getAge() >= 5 && child.getAge() < 12) {
             return new Kid(child.getId(), child.getLastName(),
                     child.getFirstName(), child.getAge(), child.getCity(),
                     child.getNiceScore(), child.getAssignedBudget(),
                     child.getNiceScoreHistory(), child.getReceivedGifts(),
-                    child.getGiftsPreferences(), child.getAverageScore(),
-                    child.getNiceScoreBonus(), child.getElf());
+                    child.getGiftsPreferences(), child.getAverageScore());
         }
-        if (child.getAge() < Constants.AGE_LAST_BABY) {
+        if (child.getAge() < 5) {
             return new Baby(child.getId(), child.getLastName(),
                     child.getFirstName(), child.getAge(), child.getCity(),
                     child.getNiceScore(), child.getAssignedBudget(),
                     child.getNiceScoreHistory(), child.getReceivedGifts(),
-                    child.getGiftsPreferences(), child.getAverageScore(),
-                    child.getNiceScoreBonus(), child.getElf());
+                    child.getGiftsPreferences(), child.getAverageScore());
         }
         return null;
     }

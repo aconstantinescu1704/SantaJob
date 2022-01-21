@@ -2,33 +2,24 @@ package checker;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import common.Constants;
 
 import java.io.File;
 import java.io.IOException;
 
-public class Checker {
+public final class Checker {
 
-    private static final int TEST_NUMBER = 30;
-    private static final int SMALL_TEST_START = 1;
-    private static final int SMALL_TEST_END = 12;
-    private static final int SMALL_TEST_SCORE = 1;
-    private static final int MEDIUM_TEST_START = 13;
-    private static final int MEDIUM_TEST_END = 19;
-    private static final int MEDIUM_TEST_SCORE = 2;
-    private static final int LARGE_TEST_START = 20;
-    private static final int LARGE_TEST_END = 29;
-    private static final int LARGE_TEST_SCORE = 3;
-    private static final int FINAL_TEST_SCORE = 4;
-    protected Checker() {
-
+    private Checker() {
+        //constructor for checkstyle
     }
-
     /**
      * This method is used to calculate total score of the implementation and checkstyle
      */
     public static void calculateScore() {
-        calculateScoreAllTests();
-        calculateScoreCheckstyle();
+
+        System.out.println("TOTAL : "
+                + (calculateScoreAllTests() + calculateScoreCheckstyle()) + "/70");
+        System.out.println("-----------------------------------------------------");
     }
 
     /**
@@ -36,8 +27,8 @@ public class Checker {
      *
      * (5 points maximum)
      */
-    private static void calculateScoreCheckstyle() {
-        Checkstyle.testCheckstyle();
+    private static int calculateScoreCheckstyle() {
+        return Checkstyle.testCheckstyle();
     }
 
     /**
@@ -45,13 +36,14 @@ public class Checker {
      *
      * 25 tests (60 points maximum)
      */
-    private static void calculateScoreAllTests() {
+    private static int calculateScoreAllTests() {
         int totalScore = 0;
-        for (int i = 1; i <= TEST_NUMBER; i++) {
+        for (int i = 1; i <= Constants.TESTS_NUMBER; i++) {
             totalScore += calculateScore(i);
         }
         System.out.println("-----------------------------------------------------");
         System.out.println("TESTS = " + totalScore + "/60");
+        return totalScore;
     }
 
     /**
@@ -62,8 +54,7 @@ public class Checker {
      * @param testNumber
      *          the testNumber you want to calculate score for
      * @return
-     *          the score of that test (1 for tests : 1 -12 )
-     *          (2 for tests : 13 - 19) (3 for tests : 20 - 29) (4 for test : 30)
+     *          the score of that test (2 for tests : 1-15) (3 for tests : 16 - 25)
      */
     public static int calculateScore(final Integer testNumber) {
         if (checkOutput(testNumber)) {
@@ -90,10 +81,18 @@ public class Checker {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            JsonNode output = mapper.readTree(new File("output/out_" + testNumber + ".json"));
-            JsonNode ref = mapper.readTree(new File("ref/ref_test" + testNumber + ".json"));
+            File outputFile = new File(Constants.OUTPUT_PATH + testNumber
+                    + Constants.FILE_EXTENSION);
+            if (outputFile.exists()) {
+                JsonNode output = mapper.readTree(outputFile);
+                JsonNode ref = mapper
+                        .readTree(new File(Constants.REF_PATH + testNumber
+                                + Constants.FILE_EXTENSION));
 
-            return output.equals(ref);
+                return output.equals(ref);
+            } else {
+                return false;
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,20 +105,10 @@ public class Checker {
      * @param testNumber
      *      the testNumber you want to calculate score for
      * @return
-     *      the score of that test (1 for tests : 1 -12 )
-     *      (2 for tests : 13 - 19) (3 for tests : 20 - 29) (4 for test : 30)
+     *      the score of that test (2 for tests : 1-15) (3 for tests : 16 - 25)
      */
     private static int getScoreForTest(final Integer testNumber) {
-
-        if (testNumber >= SMALL_TEST_START && testNumber <= SMALL_TEST_END) {
-            return SMALL_TEST_SCORE;
-        }
-        if (testNumber >= MEDIUM_TEST_START && testNumber <= MEDIUM_TEST_END) {
-            return MEDIUM_TEST_SCORE;
-        }
-        if (testNumber >= LARGE_TEST_START && testNumber <= LARGE_TEST_END) {
-            return LARGE_TEST_SCORE;
-        }
-        return FINAL_TEST_SCORE;
+        return (testNumber >= 1 && testNumber <= Constants.TESTS_NUMBER_SMALL)
+                ? Constants.SMALL_TEST_POINTS : Constants.BIG_TEST_POINTS;
     }
 }

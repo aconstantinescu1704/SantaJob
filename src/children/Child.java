@@ -1,8 +1,8 @@
 package children;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import common.Constants;
 import santa.Present;
+
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
@@ -19,15 +19,11 @@ public abstract class Child implements Comparable<Child> {
     private Double niceScore;
     private Double assignedBudget;
     private ArrayList<Present> receivedGifts = new ArrayList<>();
-    @JsonIgnore
-    private Double niceScoreBonus;
-    @JsonIgnore
-    private String elf;
+
 
     public Child(final int id, final String lastName, final String firstName,
                  final int age, final String city, final Double niceScore,
-                 final ArrayList<String> giftsPreference, final Double niceScoreBonus,
-                 final String elf) {
+                 final ArrayList<String> giftsPreference) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -35,15 +31,12 @@ public abstract class Child implements Comparable<Child> {
         this.city = city;
         this.niceScore = niceScore;
         this.giftsPreferences.addAll(giftsPreference);
-        this.niceScoreBonus = niceScoreBonus;
-        this.elf = elf;
     }
 
     public Child(final int id, final String lastName, final String firstName,
                  final int age, final String city, final Double niceScore,
                  final Double assignedBudget, final ArrayList<Double> historyScore,
-                 final ArrayList<Present> giftsReceived, final ArrayList<String> giftsPreference,
-                 final Double niceScoreBonus, final String elf) {
+                 final ArrayList<Present> giftsReceived, final ArrayList<String> giftsPreference) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -59,16 +52,14 @@ public abstract class Child implements Comparable<Child> {
         this.receivedGifts = new ArrayList<>();
         for (var present : giftsReceived) {
             this.receivedGifts.add(new Present(present.getProductName(),
-                    present.getPrice(), present.getCategory(), present.getQuantity()));
+                    present.getPrice(), present.getCategory()));
         }
-        this.niceScoreBonus = niceScoreBonus;
-        this.elf = elf;
     }
 
     /**
      * sets the average score for all age category through separate implementations
      */
-    public abstract void acceptAverageScore(VisitAverageScore visitor);
+    public abstract void setAverageScore();
 
     /**
      *
@@ -108,8 +99,7 @@ public abstract class Child implements Comparable<Child> {
      * @param gift the given present to be added
      */
     public void setReceivedGifts(final Present gift) {
-        receivedGifts.add(new Present(gift.getProductName(), gift.getPrice(),
-                gift.getCategory(), gift.getQuantity()));
+        receivedGifts.add(new Present(gift.getProductName(), gift.getPrice(), gift.getCategory()));
     }
 
     /**
@@ -118,22 +108,6 @@ public abstract class Child implements Comparable<Child> {
      */
     public ArrayList<Double> getNiceScoreHistory() {
         return niceScoreHistory;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Double getNiceScoreBonus() {
-        return niceScoreBonus;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getElf() {
-        return elf;
     }
 
     /**
@@ -240,28 +214,6 @@ public abstract class Child implements Comparable<Child> {
      */
     public ArrayList<Present> getReceivedGifts() {
         return receivedGifts;
-    }
-
-    /**
-     *
-     */
-    public void elfChanges() {
-        if (elf.equals("black")) {
-            assignedBudget = assignedBudget - assignedBudget * Constants.BUDGET_CHANGE_FACTOR
-                    / Constants.FULL_PERCENTAGE;
-        }
-        if (elf.equals("pink")) {
-            assignedBudget = assignedBudget + assignedBudget * Constants.BUDGET_CHANGE_FACTOR
-                    / Constants.FULL_PERCENTAGE;
-        }
-    }
-
-    /**
-     *
-     * @param elf
-     */
-    public void setElf(final String elf) {
-        this.elf = elf;
     }
 
     /**

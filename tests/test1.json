@@ -14,46 +14,33 @@
           "Board Games",
           "Clothes",
           "Books"
-        ],
-        "niceScoreBonus": 0,
-        "elf": "white"
+        ]
       }
     ],
     "santaGiftsList": [
       {
         "productName": "Harry Potter",
         "price": 35,
-        "category": "Books",
-        "quantity": 5
+        "category": "Books"
       },
       {
         "productName": "Dress",
         "price": 45,
-        "category": "Clothes",
-        "quantity": 4
+        "category": "Clothes"
       },
       {
         "productName": "Uno",
         "price": 10,
-        "category": "Board Games",
-        "quantity": 2
+        "category": "Board Games"
       }
     ]
   },
   "annualChanges": [
     {
-      "newSantaBudget": 326,
+      "newSantaBudget": 398,
       "newGifts": [],
       "newChildren": [],
-      "childrenUpdates": [
-        {
-          "id": 0,
-          "niceScore": 10,
-          "giftsPreferences": [],
-          "elf": "white"
-        }
-      ],
-      "strategy": "id"
+      "childrenUpdates": []
     }
   ]
 }
