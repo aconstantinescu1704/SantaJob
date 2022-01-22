@@ -1,7 +1,9 @@
 Object Oriented Programming Course
-Homework - Etapa 1 - Santa Claus is coming to ACS students
+Homework - Etapa 2 - Santa Claus is coming to ACS students
 
-November 2021
+!! We have added the specified changes that come with the second part of the project
+!! In the readme we have concluded all aspects of the implementation of the project as a whole
+   while highlighting the design pattern used
 
 # Testing
 
@@ -42,42 +44,61 @@ Run Main to test your implementation from the IDE or from command line.
                                     In addition, the class that will use the instance does not even need to specify exactly the subclass
                                     of the object to be created, so it does not need to know all the implementations of that type, but only
                                     what characteristics the created object must have.
-                        -> strategy : we want a type of algorithm (strategy) with several possible implementations and we want
-                                      to choose dynamically which algorithm we use, without making the system too tightly coupled.
-                                      Since we need 3 implementation for setting the average score, the strategy pattern is the most suited.
-                                    : because the factory and strategy pattern overlapped and because of logical purposes
-                                      => We will omit the strategy word from the classes name, but we keep in mind that kid, baby, teen are
-                                      the classes that implement the setAverage strategy
+                        -> visitor : we need to add new possibilities for processing the structure, without modifying it.
+                                    since we have more objects and operations for them, we have chosen this design pattern to be
+                                    the most suggestive when implementing the setAverage method for every type of child
                         -> singleton :  we need our factory to be used from several components of the application. To save memory, it is enough
                                         to have a single instance of the factory and use it. As a solution we make the factory class a singleton
         - Child = - abstract class that can't be instantiated since it's used to force all classes that extends
-                    her to implement strategies for the abstract method specified
+                    her to implement acceptAverageScore which is independent of the specific type of Visitor
+                    but which calls it
                   - the class contains relevant information/characteristics about each child
                   - the class also contains methods that set, reset, get and search in different ways some characteristics
-          Baby = - class that extends Child and promises to implement the abstract method setAverageScore
-                 - it implements the strategy required : average score = 10;
-          Kid =  - class that extends Child and promises to implement the abstract method setAverageScore
-                 - it implements the strategy required : average score = arithmetic average of all nice scores;
-          Teen = - class that extends Child and promises to implement the abstract method setAverageScore
-                 - it implements the strategy required : average score = weighted average of all nice scores;
+          Baby = - class that extends Child and promises to implement the abstract method acceptAverageScore
+                 - the method receives a Visitor as strategy and calls the setAverage function which will set the
+                   average score through the specific implementation decided by the the object type received
+          Kid =  - class that extends Child and promises to implement the abstract method acceptAverageScore
+                 - the method receives a Visitor as strategy and calls the setAverage function which will set the
+                   average score through the specific implementation decided by the the object type received
+          Teen = - class that extends Child and promises to implement the abstract method acceptAverageScore
+                 - the method receives a Visitor as strategy and calls the setAverage function which will set the
+                   average score through the specific implementation decided by the the object type received
           ChildFactory = - implements the factory design pattern through createFactory method that based on a child
                            age, constructs the respective object of category age which is also a strategy for the setAverageScore
                            method.
                          - the creteFactory is also overloaded, since there are 2 options of received child data
                          - the class is also a singleton
+          VisitAverageScore = - a class for the applied setAverage operation
+                              - for every object type we have a setAverage method which receives the object type as parameter and:
+                                    -> for baby : average score = 10
+                                    -> for kid : average score = arithmetic average of all nice scores
+                                    -> for teen : average score = weighted average of all nice scores
 
     * santa :  - here we have classes related to santa : santaJob and present
+               - we have created the logic of our classes based on the following design pattern:
+                        strategy : we want a type of algorithm (strategy) with several possible implementations and we want
+                                   to choose dynamically which algorithm we use, without making the system too tightly coupled.
+                                   Since we need 3 implementation for setting the present assignation,
+                                   the strategy pattern is the most suited.
+
         - Present :  - the class contains relevant information/characteristics about each child
-                     - the class also implements Comparable interface through compraTo method to facilitate
+                     - the class also implements Comparable interface through compareTo method to facilitate
                        future sorting operations
         - SantaJob : - class that stores all information about santa's job through arrays and objects specified
                        in the database package
                      - implements annualJob method that makes all updates, sets all arrays and distributes the
                         presents to all children
                      - in aggregation relationship with classes from database package
+        - AssignationStrategy : a common strategy interface that receives as parameter the annual data the assignation is
+                                based on
+        - AverageScoreStrategy : the assignation strategy based on sorting children after the average score
+        - IdStrategy : the assignation strategy based on sorting children after the id
+        - NiceScoreCityStrategy : the assignation strategy based on sorting children after their city score
+
      THE FLOW OF THE PROGRAMME:
         The data input is processed and stored in databases(arrays) of certain entities objects.
         AnnualJob method, sets all entities fields and for each annual change input, reset fields such as children
         presents, budget. It makes all necessary updates and distributes the presents to all children based on the
-        required criteria and procedure.
-      PART 2
+        certain assignation strategies. While distributing presents and setting the budget we take into account factors
+        and characteristics such as the presents' quantity, their price and children's elf that may influence the distribution
+        or the budget.
