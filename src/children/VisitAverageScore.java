@@ -4,7 +4,11 @@ import common.Constants;
 
 public class VisitAverageScore {
 
-    public void setAverageScore(Kid kid) {
+    /**
+     * sets average score for teen as the arithmetic average of
+     * all nice scores accumulated
+     */
+    public void setAverageScore(final Kid kid) {
         if (kid.getNiceScoreHistory().size() == 1) {
             kid.averageScore = kid.getNiceScore();
         } else {
@@ -14,12 +18,18 @@ public class VisitAverageScore {
             }
             kid.averageScore = kid.averageScore / kid.getNiceScoreHistory().size();
         }
-        kid.averageScore += kid.averageScore * kid.getNiceScoreBonus()/ 100 ;
-        if (kid.averageScore > 10.0) {
-            kid.averageScore = 10.0;
+        kid.averageScore += kid.averageScore * kid.getNiceScoreBonus()
+                / Constants.FULL_PERCENTAGE;
+        if (kid.averageScore > Constants.MAX_SCORE) {
+            kid.averageScore = Constants.MAX_SCORE;
         }
     }
-    public void setAverageScore(Teen teen)  {
+
+    /**
+     * sets average score for teen as the weighted average of
+     * all nice scores accumulated
+     */
+    public void setAverageScore(final Teen teen)  {
         int ponderi = 0;
         if (teen.getNiceScoreHistory().size() == 1) {
             teen.averageScore = teen.getNiceScore();
@@ -31,13 +41,17 @@ public class VisitAverageScore {
             }
             teen.averageScore = teen.averageScore / ponderi;
         }
-        teen.averageScore += teen.averageScore * teen.getNiceScoreBonus()/ 100 ;
-        if (teen.averageScore > 10.0) {
-            teen.averageScore = 10.0;
+        teen.averageScore += teen.averageScore * teen.getNiceScoreBonus()
+                / Constants.FULL_PERCENTAGE;
+        if (teen.averageScore > Constants.MAX_SCORE) {
+            teen.averageScore = Constants.MAX_SCORE;
         }
     }
 
-    public void setAverageScore(Baby baby) {
+    /**
+     * sets average score as 10 for baby
+     */
+    public void setAverageScore(final Baby baby) {
         baby.averageScore = Constants.AVERAGE_SCORE_BABY;
     }
 }

@@ -100,7 +100,8 @@ public class InputLoader {
                                         ((Long) ((JSONObject) jsonNewPresent).get("price"))
                                                 .doubleValue(),
                                         (String) ((JSONObject) jsonNewPresent).get("category"),
-                                        ((Long) ((JSONObject) jsonNewPresent).get("quantity")).intValue()));
+                                        ((Long) ((JSONObject) jsonNewPresent).get("quantity"))
+                                                .intValue()));
                             }
                         }
 

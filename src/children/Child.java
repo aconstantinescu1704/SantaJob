@@ -1,6 +1,7 @@
 package children;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import common.Constants;
 import santa.Present;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -65,7 +66,7 @@ public abstract class Child implements Comparable<Child> {
     }
 
     /**
-     * sets the average score for all age category through separate implementations
+     * accepts to set the average score through different implementations based on age type
      */
     public abstract void acceptAverageScore(VisitAverageScore visitor);
 
@@ -119,10 +120,18 @@ public abstract class Child implements Comparable<Child> {
         return niceScoreHistory;
     }
 
+    /**
+     *
+     * @return
+     */
     public Double getNiceScoreBonus() {
         return niceScoreBonus;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getElf() {
         return elf;
     }
@@ -233,16 +242,25 @@ public abstract class Child implements Comparable<Child> {
         return receivedGifts;
     }
 
+    /**
+     * method that changes assigned budget based on the type of elf
+     */
     public void elfChanges() {
         if (elf.equals("black")) {
-            assignedBudget = assignedBudget - assignedBudget * 30 / 100;
+            assignedBudget = assignedBudget - assignedBudget * Constants.BUDGET_FACTOR_CHANGE
+                    / Constants.FULL_PERCENTAGE;
         }
         if (elf.equals("pink")) {
-            assignedBudget = assignedBudget + assignedBudget * 30 / 100;
+            assignedBudget = assignedBudget + assignedBudget * Constants.BUDGET_FACTOR_CHANGE
+                    / Constants.FULL_PERCENTAGE;
         }
     }
 
-    public void setElf(String elf) {
+    /**
+     *
+     * @param elf
+     */
+    public void setElf(final String elf) {
         this.elf = elf;
     }
 

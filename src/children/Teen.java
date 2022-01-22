@@ -27,27 +27,9 @@ public class Teen extends Child {
     }
 
     /**
-     * sets average score for teen as the weighted average of
-     * all nice scores accumulated
+     * accepts to set average score based of specific implementation
      */
-    public void acceptAverageScore(VisitAverageScore visitor) {
+    public void acceptAverageScore(final VisitAverageScore visitor) {
         visitor.setAverageScore(this);
-      /*  int ponderi = 0;
-        if (super.getNiceScoreHistory().size() == 1) {
-            averageScore = super.getNiceScore();
-        } else {
-            averageScore = 0.0;
-            for (int i = 1; i <= super.getNiceScoreHistory().size(); i++) {
-                averageScore = averageScore + i * getNiceScoreHistory().get(i - 1);
-                ponderi = ponderi + i;
-            }
-            averageScore = averageScore / ponderi;
-        }
-        averageScore += averageScore * super.getNiceScoreBonus()/ 100 ;
-        if (averageScore > 10.0) {
-            averageScore = 10.0;
-        }
-
-       */
     }
 }

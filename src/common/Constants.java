@@ -1,6 +1,9 @@
 package common;
 
 public final class Constants {
+    public static final Double MAX_SCORE = 10.0;
+    public static final int BUDGET_FACTOR_CHANGE = 30;
+    public static final int FULL_PERCENTAGE = 100;
     public static final int AGE_LAST_BABY = 5;
     public static final int AGE_LAST_KID = 12;
     public static final int AGE_LAST_TEEN = 18;

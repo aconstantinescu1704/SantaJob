@@ -29,10 +29,13 @@ public class Present implements Comparable<Present> {
         return category;
     }
 
-    public int getQuantity() {
+    public final int getQuantity() {
         return quantity;
     }
 
+    /**
+     *  decreases quantity
+     */
     public void changeQuantity() {
         quantity--;
     }

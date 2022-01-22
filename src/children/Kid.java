@@ -27,26 +27,10 @@ public class Kid extends Child {
     }
 
     /**
-     * sets average score for teen as the arithmetic average of
-     * all nice scores accumulated
+     * accepts to set average score based of specific implementation
      */
-    public void acceptAverageScore(VisitAverageScore visitor) {
+    public void acceptAverageScore(final VisitAverageScore visitor) {
         visitor.setAverageScore(this);
-    /*    if (super.getNiceScoreHistory().size() == 1) {
-            averageScore = super.getNiceScore();
-        } else {
-            averageScore = 0.0;
-            for (var score : super.getNiceScoreHistory()) {
-                averageScore = averageScore + score;
-            }
-            averageScore = averageScore / super.getNiceScoreHistory().size();
-        }
-        averageScore += averageScore * super.getNiceScoreBonus()/ 100 ;
-        if (averageScore > 10.0) {
-            averageScore = 10.0;
-        }
-
-     */
     }
 
 }

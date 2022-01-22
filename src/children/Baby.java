@@ -28,10 +28,9 @@ public class Baby extends Child {
 
 
     /**
-     * sets average score as 10 for baby
+     * accepts to set average score based of specific implementation
      */
-    public void acceptAverageScore(VisitAverageScore visitor) {
+    public void acceptAverageScore(final VisitAverageScore visitor) {
         visitor.setAverageScore(this);
-        //this.averageScore = Constants.AVERAGE_SCORE_BABY;
     }
 }

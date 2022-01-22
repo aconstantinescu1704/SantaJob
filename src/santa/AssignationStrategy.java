@@ -1,10 +1,13 @@
 package santa;
 
-import children.Child;
 import database.AnnualData;
 
-import java.util.List;
+
 
 public interface AssignationStrategy {
-    public void assign (AnnualData annualData);
+    /**
+     *  method that assigns the presents to all children through different strategies
+     * @param annualData
+     */
+     void assign(AnnualData annualData);
 }

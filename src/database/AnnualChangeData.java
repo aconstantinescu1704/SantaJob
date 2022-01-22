@@ -3,7 +3,11 @@ package database;
 import children.Child;
 import children.ChildFactory;
 import fileio.AnnualChangesInput;
-import santa.*;
+import santa.AssignationStrategy;
+import santa.AverageScoreStrategy;
+import santa.IdStrategy;
+import santa.NiceScoreCityStrategy;
+import santa.Present;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +46,10 @@ public final class AnnualChangeData {
         return false;
     }
 
+    /**
+     * method that sets the strategy based on the already set field from input data
+     * @return the object that matches the strategy description
+     */
     public AssignationStrategy setStrategy() {
         if (strategy.equals("id")) {
             return new IdStrategy();

@@ -1,5 +1,9 @@
 package database;
-import children.*;
+import children.Child;
+import children.ChildFactory;
+import children.Kid;
+import children.Teen;
+import children.VisitAverageScore;
 import common.Constants;
 import fileio.InitialDataInput;
 import santa.Present;
@@ -87,7 +91,7 @@ public final class AnnualData {
     public Present getPresent(final String gift) {
         for (Present present : santaGiftsList) {
             if (present.getCategory().equals(gift)
-                    && present.getQuantity() > 0 ) {
+                    && present.getQuantity() > 0) {
                 return present;
             }
         }
@@ -137,7 +141,12 @@ public final class AnnualData {
         children.addAll(newTypeChildren);
     }
 
-    public void yellowElf(Child child) {
+    /**
+     * method that checks if a child's elf is yellow and if the case
+     * applies a present distribution technique for him
+     * @param child the child for whom we check and apply changes
+     */
+    public void yellowElf(final Child child) {
         if (child.getElf().equals("yellow")) {
             if (child.getReceivedGifts().isEmpty()) {
                 sortPresents();
